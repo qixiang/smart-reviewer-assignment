@@ -1,0 +1,52 @@
+name: 'Smart Reviewer Assignment'
+description: 'Intelligently assign PR reviewers'
+author: 'Smart Reviewer Assignment'
+
+inputs:
+  reviewer-list:
+    description: 'Comma-separated list of GitHub usernames to select reviewers from'
+    required: true
+  always-add:
+    description: 'Comma-separated list of GitHub usernames that should always be added as reviewers'
+    required: false
+    default: ''
+  min-reviewers:
+    description: 'Minimum number of reviewers to assign'
+    required: false
+    default: '2'
+  add-top-contributor:
+    description: 'Whether to add the top code contributor of modified files as a reviewer'
+    required: false
+    default: 'true'
+  selection-mode:
+    description: 'Reviewer selection mode: "random" or "balanced"'
+    required: false
+    default: 'random'
+  balanced-lookback:
+    description: 'Number of recent PRs to analyze for balanced selection (only used when selection-mode is "balanced")'
+    required: false
+    default: '10'
+  participation-checks:
+    description: 'What to check for participation: "reviewers", "comments", or "reviewers,comments" (comma-separated)'
+    required: false
+    default: 'reviewers,comments'
+  github-token:
+    description: 'GitHub token with pull request write permissions'
+    required: true
+    default: ${{ github.token }}
+
+outputs:
+  reviewers-added:
+    description: 'Comma-separated list of reviewers that were added'
+  code-contributor:
+    description: 'Username of the code contributor that was added (if any)'
+  selection-method:
+    description: 'The selection method used (random, round-robin, etc.)'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
+
+branding:
+  icon: 'users'
+  color: 'blue'
