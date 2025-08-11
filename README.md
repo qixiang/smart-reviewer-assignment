@@ -1,4 +1,4 @@
-# Smart Reviewer Assignment
+# Smart Reviewer Assignment (WIP, not ready for use)
 
 A GitHub Action that intelligently assigns reviewers to pull requests with balanced workload distribution, smart contributor analysis, and configurable selection modes.
 
